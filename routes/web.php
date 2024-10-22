@@ -67,5 +67,13 @@ Route::prefix('admin')->group(function (){
 
         Route::post('register', [AdminAuthController::class, 'register']);
         Route::post('logout', [AdminAuthController::class, 'logout']);
+
+        Route::resource('/menus', AdminMenuController::class)->except('create', 'show');
+        Route::patch('/menus/{id}/enable', [AdminMenuController::class, 'isEnable']);
+
+        Route::get('/order', [AdminOrderController::class, 'index']);
+        Route::patch('/order-accept/{id}', [AdminOrderController::class, 'accept']);
+        Route::patch('/order-decline/{id}', [AdminOrderController::class, 'decline']);
+        Route::patch('/order-done/{id}', [AdminOrderController::class, 'complete']);
     });
 });
