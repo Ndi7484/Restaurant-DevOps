@@ -55,7 +55,10 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
-    public function profile(Request $request) {
+    public function profile(Request $request) 
+    {
         // Todo[P]
+        $title="Profile";
+        return view('profile.index', compact('title'));
     }
 }
