@@ -75,5 +75,7 @@ class AdminAuthController extends Controller
     public function profile()
     {
         //Todo[A-P]
+        $title="Admin Profile";
+        return view('admin.profile.index', compact('title'));
     }
 }
