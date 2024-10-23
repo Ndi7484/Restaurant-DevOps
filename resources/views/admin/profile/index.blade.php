@@ -70,6 +70,29 @@
                 </div>
             </div>
             {{-- ToDo --}}
+
+            <!-- contoh -->
+            <form action="/profile" method="post">
+                @csrf
+                @method('put')
+                <div class="form-floating">
+                    <input type="text" name="name" class="form-control p-2 @error('name') is-invalid @enderror" id="name" placeholder="name@example.com" value="{{ old('name') }}" required>
+                    <label class="p-1" for="name">Name</label>
+                    @error('name')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-floating">
+                    <input type="text" name="phone_number" class="form-control p-2 @error('phone_number') is-invalid @enderror" id="phone_number" value="{{ old('phone_number') }}">
+                    <label class="p-1" for="name">Phone Number</label>
+                    @error('name')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-danger px-4 py-2 mb-3">Edit</button>
+            </form>
+            <!-- contoh -->
+
         </div>
     </div>
 @endsection

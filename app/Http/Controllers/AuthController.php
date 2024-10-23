@@ -57,8 +57,32 @@ class AuthController extends Controller
 
     public function profile(Request $request) 
     {
-        // Todo[P]
         $title="Profile";
         return view('profile.index', compact('title'));
+    }
+
+    public function editProfile(Request $request)
+    {
+        $rules = [
+            'name' => 'required|string',
+            'phone_number' => 'nullable|string',
+            'address' => 'nullable|string',
+            'province' => 'nullable|string',
+            'city' => 'nullable|string',
+            'post_code' => 'nullable|string'
+        ];
+
+        $input = validator($request->all(), $rules)->validated();
+
+        $user = Auth::user();
+        $user->name = $input['name'];
+        $user->phone_number = $input['phone_number'];
+        $user->address = $input['address'];
+        $user->province = $input['province'];
+        $user->city = $input['city'];
+        $user->post_code = $input['post_code'];
+        $user->save();
+
+        return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 }
