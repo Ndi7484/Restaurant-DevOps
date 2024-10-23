@@ -44,20 +44,78 @@
                     <div class="col-md-7">
                         <div class="d-flex flex-column align-items-left p-3 py-5">
                             <h5 class="text-right">Name</h5>
-                            <div class="col-sm-10"></div>
-                            <input class="form-control form-control-lg" type="text" placeholder="    {{ auth()->user()->name }}" readonly><br>
+                            <div class="row g-3">
+                                <div class="col-md-10">
+                                    <input class="form-control form-control-lg" type="text" value="    {{ auth()->user()->name }}" readonly>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-secondary btn-lg px-4 py-2">Edit</button>
+                                </div>
+                            </div>
+                            <br>
                             <h5 class="text-right">Email</h5>
-                            <input class="form-control form-control-lg" type="text" placeholder="    {{ auth()->user()->email }}" readonly><br>
+                            <div class="row g-3">
+                                <div class="col-md-10">
+                                    <input class="form-control form-control-lg" type="text" value="    {{ auth()->user()->email }}" readonly>
+                                </div>
+                            </div>
+                            <br>
                             <h5 class="text-right">Phone</h5>
-                            <input class="form-control form-control-lg" type="text" placeholder="    {{ auth()->user()->phone_number }}" readonly><br>
+                            <div class="row g-3">
+                                <div class="col-md-10">
+                                    <input class="form-control form-control-lg" type="text" value="    {{ auth()->user()->phone_number }}" readonly>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-secondary btn-lg px-4 py-2">Edit</button>
+                                </div>
+                            </div>
+                            <br>
                             <h5 class="text-right">Address</h5>
-                            <input class="form-control form-control-lg" type="text" placeholder="    {{ auth()->user()->address }}" readonly><br>
+                            <div class="row g-3">
+                                <div class="col-md-10">
+                                    <input class="form-control form-control-lg" type="text" value="    {{ auth()->user()->address }}" readonly>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-secondary btn-lg px-4 py-2">Edit</button>
+                                </div>
+                            </div>
+                            <br>
                             <h5 class="text-right">Province</h5>
-                            <input class="form-control form-control-lg" type="text" placeholder="    {{ auth()->user()->province }}" readonly><br>
+                            <div class="row g-3">
+                                <div class="col-md-10">
+                                    <input class="form-control form-control-lg" type="text" value="    {{ auth()->user()->province }}" readonly>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-secondary btn-lg px-4 py-2">Edit</button>
+                                </div>
+                            </div>
+                            <br>
                             <h5 class="text-right">City</h5>
-                            <input class="form-control form-control-lg" type="text" placeholder="    {{ auth()->user()->city }}" readonly><br>
+                            <div class="row g-3">
+                                <div class="col-md-10">
+                                    <input class="form-control form-control-lg" type="text" value="    {{ auth()->user()->city }}" readonly>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-secondary btn-lg px-4 py-2">Edit</button>
+                                </div>
+                            </div>
+                            <br>
                             <h5 class="text-right">Post Code</h5>
-                            <input class="form-control form-control-lg" type="text" placeholder="    {{ auth()->user()->post_code }}" readonly><br>
+                            <div class="row g-3">
+                                <div class="col-md-10">
+                                    <input class="form-control form-control-lg" type="text" value="    {{ auth()->user()->post_code }}" readonly>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-secondary btn-lg px-4 py-2">Edit</button>
+                                </div>
+                            </div>
+                            <br>
                         </div>
                     </div>
                 </div>
