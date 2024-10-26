@@ -62,6 +62,12 @@ class AuthController extends Controller
     }
 
     public function editProfile(Request $request)
+    {   
+        $title="Edit Profile";
+        return view('profile.edit', compact('title'));
+    }
+
+    public function updateProfile(Request $request)
     {
         $rules = [
             'name' => 'required|string',
@@ -69,20 +75,20 @@ class AuthController extends Controller
             'address' => 'nullable|string',
             'province' => 'nullable|string',
             'city' => 'nullable|string',
-            'post_code' => 'nullable|string'
+            'postal_code' => 'nullable|string'
         ];
 
         $input = validator($request->all(), $rules)->validated();
 
         $user = Auth::user();
         $user->name = $input['name'];
-        $user->phone_number = $input['phone_number'];
-        $user->address = $input['address'];
-        $user->province = $input['province'];
-        $user->city = $input['city'];
-        $user->post_code = $input['post_code'];
+        $user->phone_number = $input['phone_number'] ?? null;
+        $user->address = $input['address'] ?? null;
+        $user->province = $input['province'] ?? null;
+        $user->city = $input['city'] ?? null;
+        $user->post_code = $input['postal_code'] ?? null;
         $user->save();
 
-        return redirect()->back()->with('success', 'Profile updated successfully!');
+        return redirect('/profile')->with('success', 'Profile updated successfully!');
     }
 }
