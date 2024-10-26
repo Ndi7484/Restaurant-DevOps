@@ -31,7 +31,6 @@
                 </div> 
             @endif
 
-            {{-- Todo[A-P] --}}
             <table class="mt-3">
                 <tr >
                     <td class="px-1"><h4>Name</h4></td>

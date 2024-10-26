@@ -31,7 +31,9 @@ Route::middleware(['auth', 'non-admin'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::get('/', [MenuController::class, 'index']);
-    Route::get('profile', [AuthController::class, 'profile']);
+    Route::get('/profile', [AuthController::class, 'profile']);
+    Route::get('/profile/edit', [AuthController::class, 'editProfile']);
+    Route::put('/profile', [AuthController::class, 'updateProfile']);
 
     Route::resource('/baskets', BasketController::class)->except('create', 'show', 'edit','destroy', 'update');
     Route::post('/basket/{id}', [BasketController::class, 'update']);
