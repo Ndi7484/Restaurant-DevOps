@@ -66,6 +66,7 @@ Route::prefix('admin')->group(function (){
 
         Route::get('admin', [AdminAuthController::class, 'index']);
         Route::get('profile', [AdminAuthController::class, 'profile']);
+        Route::put('profile/change-email', [AdminAuthController::class, 'changeEmail']);
 
         Route::post('register', [AdminAuthController::class, 'register']);
         Route::post('logout', [AdminAuthController::class, 'logout']);

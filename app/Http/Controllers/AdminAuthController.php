@@ -74,8 +74,31 @@ class AdminAuthController extends Controller
 
     public function profile()
     {
-        //Todo[A-P]
-        $title="Admin Profile";
+        $title = 'Profile';
         return view('admin.profile.index', compact('title'));
+    }
+
+    public function changeEmail(Request $request)
+    {
+        $rules = [
+            'email' => 'required|email:dns',
+            'password' => 'required'
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        $user = Auth::user();
+
+        if($validatedData['email'] === $user->email){
+            return redirect()->back()->with('error', 'New e-mail cannot be same as your current e-mail.');
+        }
+
+        if(Hash::check($validatedData['password'], $user->password)){
+            $user->email = $validatedData['email'];
+            $user->save();
+            return redirect()->back()->with('success', 'Email has been changed!');
+        } 
+
+        return redirect()->back()->with('error', 'Wrong Password!');
     }
 }
