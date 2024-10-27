@@ -25,12 +25,12 @@
                     Order
                 </a>
             </li>
-            <li class="nav-item mb-3">
+            {{-- <li class="nav-item mb-3">
                 <a class="nav-link {{ Request::is('history') ? 'active' : '' }}" href="/history">
                     <span data-feather="shopping-bag"></span>
                     History
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
     <form action="/logout" method="post" class="px-4">
