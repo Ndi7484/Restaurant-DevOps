@@ -15,3 +15,5 @@ run seeder only for once for starter data
 NB: you can use admin account after run the seeder:
 email: admin@gmail.com
 password: password
+
+Access application: http://127.0.0.1:8000
