@@ -8,7 +8,7 @@ services:
     depends_on:
       - cache
     networks:
-      - retaurant-prod
+      - restaurant-prod
 
   web_server:
     image: epsilon/restaurant:web_server
@@ -20,7 +20,7 @@ services:
     depends_on:
       - app
     networks:
-      - retaurant-prod
+      - restaurant-prod
 
   mysql:
     image: mysql:latest
@@ -36,7 +36,7 @@ services:
       MYSQL_USER: 'dbmanager'
       MYSQL_PASSWORD: 'dbmanager'
     networks:
-      - retaurant-prod
+      - restaurant-prod
 
   cache:
     image: redis:alpine
@@ -49,5 +49,5 @@ volumes:
   dbdata:
 
 networks:
-  retaurant-prod:
+  restaurant-prod:
     driver: bridge
