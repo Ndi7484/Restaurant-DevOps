@@ -12,7 +12,7 @@ class MenuController extends Controller
     {
         return view('index', [
             'title' => 'Home',
-            'menus' => Menu::orderBy('name')->paginate(8),
+            'menus' => Menu::orderBy('name')->paginate(6),
             'types' => MenuType::toSelectOption(),
         ]);
     }

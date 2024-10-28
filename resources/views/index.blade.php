@@ -22,7 +22,7 @@
                     @endif
                     <div class="card-body">
                         <h5 class="card-title text-center py-2">{{ $menu->name }}</h5>
-                        <p class="card-text px-3 mb-2">{{ $menu->description }}</p>
+                        <p class="card-text px-3 mb-2" style="height: 75px">{{ $menu->description }}</p>
                     </div>
                     <ul class="list-group list-group-flush ">
                         <li class="list-group-item py-2 border-warning px-3">Price: Rp. {{number_format($menu->price)}}</li>
