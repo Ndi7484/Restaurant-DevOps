@@ -3,6 +3,6 @@
     <a class="navbar-brand mx-5" href="/">
       <img src="/image/icon.png" alt="Logo" width="40" height="45" class=" align-text-top ">
     </a>
-    <h2 class="position-absolute top-50 start-50  translate-middle">My Restaurant</h2>
+    <h2 class="position-absolute top-50 start-50 translate-middle fs-3">Restaurant <span class="fs-1">ε</span>psilon</h2>
   </div>
 </nav>
