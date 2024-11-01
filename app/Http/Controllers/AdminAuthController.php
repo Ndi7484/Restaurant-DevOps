@@ -101,4 +101,22 @@ class AdminAuthController extends Controller
 
         return redirect()->back()->with('error', 'Wrong Password!');
     }
+
+    public function changePassword(Request $request)
+    {
+        $input = validator($request->all(), [
+            'old_password' => 'required',
+            'new_password' => 'required|min:8|max:255|confirmed'
+        ])->validate();
+
+        $user = Auth::user();
+
+        if(Hash::check($input['old_password'], $user->password)) {
+            $user->password = Hash::make($input['new_password']);
+            $user->save();
+            return redirect()->back()->with('success', 'Password has been changed!');
+        }
+
+        return redirect()->back()->with('error', 'Wrong Password!');
+    }
 }
