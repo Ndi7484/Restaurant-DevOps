@@ -29,7 +29,7 @@ use App\Enums\OrderType;
                 @if (in_array($order->status, [OrderStatus::PENDING, OrderStatus::ON_GOING]))     
                     <div class="border border-5 border-warning mt-3 p-3 pt-4 col-md-7 col-lg-10 position-relative">
                         @foreach ($order->menus as $menu)
-                            <span class="position-absolute top-0 start-50 translate-middle badge @if($order->status == 'pending') bg-primary @else bg-success @endif px-5 py-2 fs-6">{{ ucwords($order->status) }}</span>
+                            <span class="position-absolute top-0 start-50 translate-middle badge @if($order->status == OrderStatus::PENDING) bg-primary @else bg-success @endif px-5 py-2 fs-6">{{ ucwords($order->status) }}</span>
                             <div class="d-flex justify-content-between mb-2">
                                 <div>
                                     <h5 class="d-inline">{{ $menu->name }}</h5>
