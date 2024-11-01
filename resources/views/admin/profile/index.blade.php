@@ -40,7 +40,37 @@
                     <td class="px-1"><h4>Email</h4></td>
                     <td class="px-2"><h4>:</h4></td>
                     <td><h4>{{ auth()->user()->email }}</h4></td>
-                    <td class="px-3"><button type="button" class="btn btn-warning p-1 border" data-bs-toggle="modal" data-bs-target="#changeEmail">Change Email</button></td>
+                    <td class="px-3">
+                        <button type="button" class="btn btn-warning p-1 border" data-bs-toggle="modal" data-bs-target="#changeEmail">Change Email</button>
+                        <div class="modal position-absolute start-50 fade modal-dialog modal-dialog-centered" id="changeEmail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="/admin/profile/change-email" method="POST" class="p-2">
+                                        @method('put')
+                                        @csrf
+                                        <div class="modal-header mb-3">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Change Email</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-floating">
+                                                <input type="email" name="email" class="form-control p-2 @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" value="{{ old('email') }}" autofocus required>
+                                                <label for="email" class="px-1 py-2">New Email Address</label>
+                                            </div>
+                                            <div class="form-floating">
+                                                <input type="password" name="password" class="form-control p-2" id="password" placeholder="Password" required>
+                                                <label for="password" class="px-1 py-2">Your Password</label>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer py-2">
+                                            <button type="button" class="btn btn-secondary p-1" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary ms-2 p-1">Change</button>
+                                        </div>
+                                    </form>            
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </table>
             <button type="button" class="btn btn-warning mt-3 p-1 border" data-bs-toggle="modal" data-bs-target="#changePw">Change Password</button>
@@ -80,37 +110,6 @@
                             <div class="modal-footer py-2">
                                 <button type="button" class="btn btn-danger p-1" data-bs-dismiss="modal">Cancel</button>
                                 <button type="submit" class="btn btn-primary ms-2 p-1">Confirm</button>
-                            </div>
-                        </form>            
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-            <div class="modal  fade modal-dialog modal-dialog-centered" id="changeEmail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form action="/admin/profile/change-email" method="POST" class="p-2">
-                            @method('put')
-                            @csrf
-                            <div class="modal-header mb-3">
-                                <h5 class="modal-title" id="staticBackdropLabel">Change Email</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-floating">
-                                    <input type="email" name="email" class="form-control p-2 @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" value="{{ old('email') }}" autofocus required>
-                                    <label for="email" class="px-1 py-2">New Email Address</label>
-                                </div>
-                                <div class="form-floating">
-                                    <input type="password" name="password" class="form-control p-2" id="password" placeholder="Password" required>
-                                    <label for="password" class="px-1 py-2">Your Password</label>
-                                </div>
-                            </div>
-                            <div class="modal-footer py-2">
-                                <button type="button" class="btn btn-secondary p-1" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary ms-2 p-1">Change</button>
                             </div>
                         </form>            
                     </div>

@@ -75,7 +75,7 @@ class AuthController extends Controller
             'address' => 'nullable|string',
             'province' => 'nullable|string',
             'city' => 'nullable|string',
-            'postal_code' => 'nullable|string'
+            'post_code' => 'nullable|string'
         ];
 
         $input = validator($request->all(), $rules)->validated();
@@ -86,7 +86,7 @@ class AuthController extends Controller
         $user->address = $input['address'] ?? null;
         $user->province = $input['province'] ?? null;
         $user->city = $input['city'] ?? null;
-        $user->post_code = $input['postal_code'] ?? null;
+        $user->post_code = $input['post_code'] ?? null;
         $user->save();
 
         return redirect('/profile')->with('success', 'Profile updated successfully!');
