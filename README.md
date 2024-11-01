@@ -1,6 +1,6 @@
 ## How to run
-- run "docker pull angelineho/restaurant-epsilon:app_1.0.0"
-- run "docker pull angelineho/restaurant-epsilon:web_server"
+- run "docker pull angelineho/restaurant_epsilon:app_1.0.0"
+- run "docker pull angelineho/restaurant_epsilon:web_server"
 
 - create file .env from file .env.example
 - run "docker compose up"
