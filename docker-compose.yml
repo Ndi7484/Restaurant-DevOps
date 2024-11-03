@@ -1,6 +1,6 @@
 services:
   app:
-    image: angelineho/restaurant_epsilon:app_1.0.0
+    image: angelineho/restaurant_epsilon:app_1.1.0
     container_name: app
     restart: unless-stopped
     tty: true
