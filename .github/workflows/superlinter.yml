@@ -16,3 +16,8 @@ jobs:
           VALIDATE_HTML: true
           VALIDATE_PHP: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
