@@ -32,7 +32,7 @@ jobs:
 
     # Step 4: Set up Minikube
     - name: Set up Minikube
-      uses: manusa/actions-setup-minikube@v2
+      uses: manusa/actions-setup-minikube@v2.13.0
       with:
         minikube-version: 'latest'
         kubernetes-version: 'stable'
