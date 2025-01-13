@@ -1,0 +1,249 @@
+# Persistent Volume for MySQL
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /mnt/data/mysql
+
+---
+
+# Persistent Volume Claim for MySQL
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+
+# Persistent Volume for Laravel App
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: app-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /mnt/data/app
+
+---
+
+# Persistent Volume Claim for Laravel App
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+
+---
+
+# Deployment for MySQL
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:latest
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "epsilonrestaurant"
+        - name: MYSQL_DATABASE
+          value: "restaurant"
+        - name: MYSQL_USER
+          value: "dbmanager"
+        - name: MYSQL_PASSWORD
+          value: "dbmanager"
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: mysql-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc
+
+---
+
+# Deployment for Laravel App
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: laravel-app
+  template:
+    metadata:
+      labels:
+        app: laravel-app
+    spec:
+      containers:
+      - name: app
+        image: angelineho/restaurant_epsilon:app_1.1.0
+        ports:
+        - containerPort: 9000
+        volumeMounts:
+        - name: app-storage
+          mountPath: /var/www/html
+        env:
+        - name: DB_CONNECTION
+          value: "mysql"
+        - name: DB_HOST
+          value: "mysql-service"
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_DATABASE
+          value: "restaurant"
+        - name: DB_USERNAME
+          value: "dbmanager"
+        - name: DB_PASSWORD
+          value: "dbmanager"
+      volumes:
+      - name: app-storage
+        persistentVolumeClaim:
+          claimName: app-pvc
+
+---
+
+# Deployment for Nginx Web Server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-server
+  template:
+    metadata:
+      labels:
+        app: web-server
+    spec:
+      containers:
+      - name: web-server
+        image: angelineho/restaurant_epsilon:web_server
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-config-volume
+          mountPath: /etc/nginx/conf.d/default.conf
+          subPath: default.conf
+      volumes:
+      - name: nginx-config-volume
+        configMap:
+          name: nginx-config
+
+---
+
+# Service for MySQL
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  selector:
+    app: mysql
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
+  type: ClusterIP
+
+---
+
+# Service for Laravel App
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  selector:
+    app: laravel-app
+  ports:
+  - protocol: TCP
+    port: 9000
+    targetPort: 9000
+  type: ClusterIP
+
+---
+
+# Service for Nginx Web Server
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-server-service
+spec:
+  selector:
+    app: web-server
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+
+---
+
+# ConfigMap for Nginx Configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  default.conf: |
+    server {
+        listen 80;
+        index index.php index.html;
+        error_log  /var/log/nginx/error.log;
+        access_log /var/log/nginx/access.log;
+        root /var/www/public;
+
+        location ~ \.php$ {
+            try_files $uri =404;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_pass app-service:9000;
+            fastcgi_index index.php;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param PATH_INFO $fastcgi_path_info;
+        }
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+            gzip_static on;
+        }
+    }
