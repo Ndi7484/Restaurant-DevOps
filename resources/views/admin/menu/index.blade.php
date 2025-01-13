@@ -11,7 +11,7 @@ use App\Enums\MenuType;
 @section('container')
     <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="container my-5 mx-3">
-            <h1 class="mb-3">Menu Management</h1>
+            <h1 class="mb-3">Menu Management.</h1>
 
             @if (session()->has('success'))
                 <div class="alert alert-success col-md-10 mb-2 p-3" role="alert">{{ session('success') }}</div> 
