@@ -27,15 +27,16 @@ jobs:
     # Step 3: Build and push Docker images
     - name: Build and push Laravel app image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/restaurant_epsilon/app:latest -f Docker/Dockerfile/app.Dockerfile .
-        docker push ${{ secrets.DOCKER_USERNAME }}/restaurant_epsilon/app:latest
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/restaurant_epsilon:app_latest -f Docker/Dockerfile/app.Dockerfile .
+        docker push ${{ secrets.DOCKER_USERNAME }}/restaurant_epsilon:app_latest
 
     # Step 4: Set up Minikube
     - name: Set up Minikube
       uses: manusa/actions-setup-minikube@v2.13.0
       with:
-        minikube-version: 'latest'
-        kubernetes-version: 'stable'
+        minikube version: 'v1.34.0'
+        kubernetes version: 'v1.31.1'
+        github token: ${{ secrets.GITHUB_TOKEN }}
         driver: docker
 
     # Step 5: Deploy to Minikube
