@@ -87,6 +87,13 @@ spec:
           value: "dbmanager"
         ports:
         - containerPort: 3306
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "256Mi"
+          limits:
+            cpu: "1"
+            memory: "512Mi"
         volumeMounts:
         - name: mysql-storage
           mountPath: /var/lib/mysql
@@ -117,6 +124,13 @@ spec:
         image: angelineho/restaurant_epsilon:app_latest
         ports:
         - containerPort: 9000
+        resources:
+          requests:
+            cpu: "1000m"
+            memory: "512Mi"
+          limits:
+            cpu: "2"
+            memory: "1Gi"
         volumeMounts:
         - name: app-storage
           mountPath: /var/www/html
@@ -160,6 +174,13 @@ spec:
         image: angelineho/restaurant_epsilon:web_server
         ports:
         - containerPort: 80
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "256Mi"
+          limits:
+            cpu: "1"
+            memory: "512Mi"
         volumeMounts:
         - name: nginx-config-volume
           mountPath: /etc/nginx/conf.d/default.conf
