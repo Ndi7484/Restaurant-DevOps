@@ -122,6 +122,7 @@ spec:
       containers:
       - name: app
         image: angelineho/restaurant_epsilon:app_latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 9000
         resources:
