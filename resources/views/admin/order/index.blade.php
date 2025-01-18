@@ -22,7 +22,7 @@ use App\Enums\OrderType;
         @endforeach
         @if (!$found)
             <div class="alert alert-danger col-md-3 p-3" role="alert">
-                <h5>There is no order yet</h5>
+                <h5>There is no order yet!</h5>
             </div>
         @else
             @foreach ($orders as $order)
